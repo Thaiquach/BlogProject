@@ -6,7 +6,7 @@ public class Post {
     private String title;
     private String description;
     private String content;
-    private Instant date;
+    private Instant createdDate;
 
     public Post() {
     }
@@ -51,12 +51,12 @@ public class Post {
         this.content = content;
     }
 
-    public Instant getDate() {
-        return date;
+    public Instant getCreatedDate() {
+        return createdDate;
     }
 
-    public void setDate(Instant date) {
-        this.date = date;
+    public void setCreatedDate(Instant createdDate) {
+        this.createdDate = createdDate;
     }
 }
 

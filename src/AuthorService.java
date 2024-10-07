@@ -2,10 +2,12 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class AuthorService {
-    public  static ArrayList<Author> getListAuthor(){
-        ArrayList<Author> authorList = new ArrayList<>();
+    public  static Stream<Author> getListAuthor(){
+        List<Author> authorList = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
         for (int i = 0; i < 3; i ++) {
             Author author = new Author();
@@ -32,45 +34,25 @@ public class AuthorService {
 
             authorList.add(author);
         }
-        return authorList;
+        return authorList.stream();
     }
 
-    public static List<Author> findAuthorByName(List<Author> authors){
-      List<Author> filtered = new ArrayList<Author>();
+    public static Stream <Author> findAuthorByName(Stream<Author> authors){
       Scanner scanner = new Scanner(System.in);
       System.out.println("Searching name");
       String name = scanner.nextLine();
-      for(int i = 0 ; i < authors.size() ; i++ ){
-          Author authorAtPositionI = authors.get(i);
-           if(authorAtPositionI.getUsername().equals(name) ){
-              filtered.add(authorAtPositionI);
-          }
-      }
-        return filtered;
+      return authors.filter(author -> author.getUsername().equals(name));
     }
 
-    public static List<Author> findAuthorByEmail(List<Author> authors){
-        List<Author> filtered = new ArrayList<>();
+    public static Stream<Author> findAuthorByEmail(Stream<Author> authors){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Searching email");
-        String email = scanner.nextLine();
-        for(int i = 0 ; i < authors.size() ; i++ ){
-            Author authorAtPositionI = authors.get(i);
-            if(authorAtPositionI.getEmail().equals(email) ){
-                filtered.add(authorAtPositionI);
-            }
-        }
-        return filtered;
+        String emailInput = scanner.nextLine();
+        return authors.filter(email -> email.getEmail().equals(emailInput));
     }
 
-    public static List<Post> findAuthorName (List<Post> posts){
-        List<Post> filtered = new ArrayList<>();
-        for(Post post : posts){
-            String author = post.getAuthor();
-            if(!filtered.contains(author)){
-                filtered.get(Integer.parseInt(author));
-            }
-        }
-        return filtered;
+    public static Stream<String> findAuthorName (Stream<Post> posts){
+        return posts.map(Post :: getAuthor)
+                .distinct();
     }
 }

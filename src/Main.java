@@ -1,115 +1,113 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static java.lang.String.*;
 
 public class Main {
     public static void main(String[] args) {
-        //Given a list of authors
-        ArrayList<Author> authorList =  AuthorService.getListAuthor();
-        for (Author author : authorList) {
-            System.out.println("Username: " + author.getUsername());
-            System.out.println("Password: " + author.getPassword());
-            System.out.println("First Name: " + author.getFirst_name());
-            System.out.println("Last Name: " + author.getLast_name());
-            System.out.println("Email: " + author.getEmail());
-            System.out.println("Birthdate: " + author.getBirthdate());
-            System.out.println("Added: " + author.getAdded());
-            System.out.println("-----------------------------");
-        }
-        // find author by name
-        List<Author> resultByName = AuthorService.findAuthorByName(authorList);
-        for (Author author : resultByName) {
-            System.out.println("Username: " + author.getUsername());
-            //System.out.println("Password: " + author.getPassword());
-            System.out.println("First Name: " + author.getFirst_name());
-            System.out.println("Last Name: " + author.getLast_name());
-            System.out.println("Email: " + author.getEmail());
-            System.out.println("Birthdate: " + author.getBirthdate());
-            //System.out.println("Added: " + author.getAdded());
-            System.out.println("-----------------------------");
-        }
-        //find author by email
-        List<Author> resultByEmail = AuthorService.findAuthorByEmail(authorList);
-        for (Author author : resultByEmail) {
-            System.out.println("Username: " + author.getUsername());
-            //System.out.println("Password: " + author.getPassword());
-            System.out.println("First Name: " + author.getFirst_name());
-            System.out.println("Last Name: " + author.getLast_name());
-            System.out.println("Email: " + author.getEmail());
-            System.out.println("Birthdate: " + author.getBirthdate());
-            //System.out.println("Added: " + author.getAdded());
-            System.out.println("-----------------------------");
-        }
-        //Given a list of posts
-        List<Post> postList = PostService.getListPost();
-        for (Post post : postList) {
-            System.out.println("Username: " + post.getId());
-            System.out.println("First Name: " + post.getAuthor());
-            System.out.println("Last Name: " + post.getTitle());
-            System.out.println("Email: " + post.getDescription());
-            System.out.println("Birthdate: " + post.getContent());
-            System.out.println("-----------------------------");
-        }
-        //find all posts of the specific author
-        List<Post> resultForPost = PostService.findPostByAuthor(postList);
-        for (Post post : resultForPost) {
-            System.out.println("Username: " + post.getId());
-            System.out.println("First Name: " + post.getAuthor());
-            System.out.println("Last Name: " + post.getTitle());
-            System.out.println("Email: " + post.getDescription());
-            System.out.println("Birthdate: " + post.getContent());
-            System.out.println("-----------------------------");
-        }
-        //find all posts that their title or content contains the specific string
-        List<Post> resultForPost_Title = PostService.findPostByTitle(postList);
-        for (Post post : resultForPost_Title) {
-            System.out.println("Username: " + post.getId());
-            System.out.println("First Name: " + post.getAuthor());
-            System.out.println("Last Name: " + post.getTitle());
-            System.out.println("Email: " + post.getDescription());
-            System.out.println("Birthdate: " + post.getContent());
-            System.out.println("-----------------------------");
-        }
-        List<Post> resultForPost_Content = PostService.findPostByContent(postList);
-        for (Post post : resultForPost_Content) {
-            System.out.println("Username: " + post.getId());
-            System.out.println("First Name: " + post.getAuthor());
-            System.out.println("Last Name: " + post.getTitle());
-            System.out.println("Email: " + post.getDescription());
-            System.out.println("Birthdate: " + post.getContent());
-            System.out.println("-----------------------------");
-        }
+//        //Given a list of authors
+//        Stream<Author> authorList =  AuthorService.getListAuthor();
+//        authorList.forEach(System.out::println);
+//
+//        // find author by name
+//        Stream <Author> resultByName = AuthorService.findAuthorByName(authorList);
+//        resultByName.forEach(System.out::println);
+//
+//        //find author by email
+//        Stream<Author> resultByEmail = AuthorService.findAuthorByEmail(authorList);
+//        resultByEmail.forEach(System.out::println);
 
-        //find the top 10 newest posts of one specific author
-        //find the top 10 newest posts of one specific author and their title or content contains the specific string
-        List<Post> top10NewestPosts = PostService. findTop10NewestPostsByAuthor(postList);
-        for (Post post : top10NewestPosts) {
-            System.out.println("Username: " + post.getId());
-            System.out.println("First Name: " + post.getAuthor());
-            System.out.println("Last Name: " + post.getTitle());
-            System.out.println("Email: " + post.getDescription());
-            System.out.println("Birthdate: " + post.getContent());
-            System.out.println("-----------------------------");
-        }
+        //Given a list of posts
+//        List<Post> postList = PostService.getListPost().collect(Collectors.toList());
+//        postList.forEach(System.out::println);
+//        Stream<Post> postStream = postList.stream();
+
+
+//        //find all posts of the specific author
+//        Stream<Post> resultForPost = PostService.findPostByAuthor(postList);
+//        resultForPost.forEach(System.out::println);
+//
+//        //find all posts that their title or content contains the specific string
+//        Stream<Post> resultForPost_Title = PostService.findPostByTitle(postList);
+//        resultForPost_Title.forEach(System.out::println);
+//        Stream<Post> resultForPost_Content = PostService.findPostByContent(postList);
+//        resultForPost_Content.forEach(System.out::println);
+//
+//        //find the top 10 newest posts of one specific author
+//        //find the top 10 newest posts of one specific author and their title or content contains the specific string
+//        Stream<Post> top10NewestPosts = PostService. findTop10NewestPostsByAuthor(postList);
+//        top10NewestPosts.forEach(System.out::println);
+
         //find all posts of all users (group by user)
-        Map<String, List<Post>> postsByAuthor = PostService.groupPostsByAuthor(postList);
-        for (String author : postsByAuthor.keySet()) {
-            System.out.println("Posts by " + author + ":");
-            List<Post> authorPosts = postsByAuthor.get(author);
-            for (Post post : authorPosts) {
-                System.out.println("Title: " + post.getTitle());
-                System.out.println("Description: " + post.getDescription());
-                System.out.println("Date: " + post.getDate());
-                System.out.println("---");
+        //Given a list of authors (A) and a list of posts, find all posts which are created by authors in the list (A)
+//        Map<String, List<Post>> postsByAuthor = PostService.groupPostsByAuthor(postStream);
+//        for (String author : postsByAuthor.keySet()) {
+//            System.out.println("Posts by " + author + ":");
+//            List<Post> authorPosts = postsByAuthor.get(author);
+//            for (Post post : authorPosts) {
+//                System.out.println("Title: " + post.getTitle());
+//                System.out.println("Description: " + post.getDescription());
+//                System.out.println("Date: " + post.getCreatedDate());
+//                System.out.println("---");
+//            }
+//        }
+//        //find all author's names
+//        Stream<String> resultForAuthorName = AuthorService.findAuthorName(postList);
+//        resultForAuthorName.forEach(System.out::println);
+//
+//        Stream<Authority> authorityList = AuthorityService.getListAuthority();
+//        authorityList.forEach(System.out::println);
+//
+//        //find all authorities of the specific user
+//        Stream<Authority> resultForAuthoritOfUser = AuthorityService.findAuthorityOfUser(authorityList);
+//        resultForAuthoritOfUser.forEach(System.out::println);
+//        // find all postToDay
+//        Stream<Post> resultOfAllPostToDay = PostService.findAllPostsToday(postList);
+//        resultOfAllPostToDay.forEach(System.out::println);
+
+
+//
+
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        Scanner sc = new Scanner(System.in);
+        LocalDate currentDateTime = null;
+        while (true) {
+            System.out.print("Enter time such as (yyyy-MM-dd): ");
+            String currentTime = sc.nextLine();
+            try{
+                currentDateTime = LocalDate.parse(currentTime, formatter);
+                // LocalDate.parse phương thức này yêu cầu một biến đầu vào và một đối tượng dạng DateTimeFormatter
+                break;
+            }catch(Exception e){
+                e.printStackTrace();
+                System.out.println("Invalid time format");
             }
         }
-        //find all author's names
-        List<Post> resultForAuthorName = AuthorService.findAuthorName(postList);
-        for (Post post : resultForAuthorName) {
-            System.out.println("First Name: " + post.getAuthor());
-        }
-        //find all authorities of the specific user
+        String formatted = DatetimeUtils.formatDate(currentDateTime, "yyyy-MM-dd");
+        System.out.println(formatted);
+
+        System.out.print("Enter date such as (yyyy-MM-dd): ");
+        String date = sc.nextLine();
+        LocalDate createDated = DatetimeUtils.createDate(date, "yyyy-MM-dd");
+        System.out.println(createDated);
+
+        System.out.print("Enter date such as (yyyy-MM-dd): ");
+        String dateToConver = sc.nextLine();
+        String convertedDate  = DatetimeUtils.convertDate(dateToConver, "yyyy-MM-dd", "dd-MM-yyyy");
+        System.out.println(convertedDate);
+
+
+
+
+
+
 
 
     }
 }
+
